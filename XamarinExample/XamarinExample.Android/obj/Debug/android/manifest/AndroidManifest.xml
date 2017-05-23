@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.XamarinExample" android:installLocation="auto" android:versionCode="1" android:versionName="1.0">
+  <!--suppress UsesMinSdkAttributes-->
+  <uses-sdk android:minSdkVersion="15" />
+  <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
+  <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" />
+  <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" />
+  <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
+  <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" />
+  <permission android:name="com.example.XamarinExample.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+  <uses-permission android:name="com.example.XamarinExample.permission.C2D_MESSAGE" />
+  <receiver android:name="com.streethawk.library.push.GCMReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+    <intent-filter>
+      <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+      <!-- Add  package_name here -->
+      <category android:name="com.example.XamarinExample" />
+    </intent-filter>
+  </receiver>
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <application android:label="XamarinExample" android:icon="@drawable/icon" android:name="android.app.Application" android:allowBackup="true" android:debuggable="true">
+    <meta-data android:name="app_key" android:value="SHPushPing_bison" />
+    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+    <service android:name="com.streethawk.library.push.SHGcmListenerService" android:exported="false">
+      <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+      </intent-filter>
+    </service>
+    <receiver android:name="com.streethawk.library.push.GCMReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+      <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        <!--Add  package_name here-->
+        <category android:name="finals.finals" />
+      </intent-filter>
+    </receiver>
+    <receiver android:name="com.streethawk.library.push.PushNotificationBroadcastReceiver">
+      <intent-filter>
+        <action android:name="com.streethawk.intent.action.pushnotification" />
+        <action android:name="com.streethawk.intent.action.gcm.STREETHAWK_DECLINED" />
+        <action android:name="com.streethawk.intent.action.gcm.STREETHAWK_POSTPONED" />
+        <action android:name="com.streethawk.intent.action.gcm.STREETHAWK_ACCEPTED" />
+        <action android:name="com.streethawk.intent.action.APP_STATUS_NOTIFICATION" />
+        <action android:name="com.streethawk.intent.action.MSG_FROM_CORE" />
+      </intent-filter>
+    </receiver>
+    <service android:name="com.streethawk.library.push.SHInstanceIDListenerService" android:enabled="true" android:exported="true">
+      <intent-filter>
+        <action android:name="com.google.android.gms.iid.InstanceID" />
+      </intent-filter>
+    </service>
+    <activity android:configChanges="orientation|screenSize" android:icon="@drawable/icon" android:label="XamarinExample" android:theme="@style/MainTheme" android:name="md5b8ee36f93d3035c82abb638897854590.MainActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="com.example.XamarinExample.mono.MonoRuntimeProvider.__mono_init__" />
+    <!--suppress ExportedReceiver-->
+    <receiver android:name="mono.android.Seppuku">
+      <intent-filter>
+        <action android:name="mono.android.intent.action.SEPPUKU" />
+        <category android:name="mono.android.intent.category.SEPPUKU.com.example.XamarinExample" />
+      </intent-filter>
+    </receiver>
+    <receiver android:name="com.streethawk.library.core.StreethawkBroadcastReceiver" android:enabled="true" android:exported="true">
+      <intent-filter>
+        <action android:name="android.location.PROVIDERS_CHANGED" />
+        <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <action android:name="com.streethawk.intent.action.gcm.STREETHAWK_APP_STATUS_CHK" />
+      </intent-filter>
+    </receiver>
+    <service android:name="com.streethawk.library.core.StreetHawkCoreService" android:enabled="true" android:exported="true"></service>
+    <activity android:name="com.streethawk.library.push.SHFeedbackActivity" android:label="@string/title_activity_shfeedback" />
+    <service android:name="com.streethawk.library.push.SHGcmListenerService" android:exported="false">
+      <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+      </intent-filter>
+    </service>
+    <receiver android:name="com.streethawk.library.push.PushNotificationBroadcastReceiver">
+      <intent-filter>
+        <action android:name="com.streethawk.intent.action.pushnotification" />
+        <action android:name="com.streethawk.intent.action.gcm.STREETHAWK_DECLINED" />
+        <action android:name="com.streethawk.intent.action.gcm.STREETHAWK_POSTPONED" />
+        <action android:name="com.streethawk.intent.action.gcm.STREETHAWK_ACCEPTED" />
+        <action android:name="com.streethawk.intent.action.APP_STATUS_NOTIFICATION" />
+        <action android:name="com.streethawk.intent.action.MSG_FROM_CORE" />
+      </intent-filter>
+    </receiver>
+    <service android:name="com.streethawk.library.push.SHInstanceIDListenerService" android:enabled="true" android:exported="true">
+      <intent-filter>
+        <action android:name="com.google.android.gms.iid.InstanceID" />
+      </intent-filter>
+    </service>
+    <activity android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:exported="false" />
+    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+  </application>
+  <!-- com.example.XamarinExample-->
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.GET_TASKS" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+</manifest>
